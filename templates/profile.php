@@ -44,20 +44,20 @@
                             <h4 class="content-title">Acount Details</h4>
                             <div class="form-group">
                                 <label>Name*</label>
-                                <input type="text" name="name" class="my-form-control" placeholder="Enter Your Usewrname">
+                                <input type="text" name="name" value="<?=$user['name']?>" class="my-form-control" placeholder="Enter Your Usewrname">
                             </div>
                             <div class="form-group">
                                 <label>Surname*</label>
-                                <input type="text" name="surname" class="my-form-control" placeholder="Enter Your Full Name">
+                                <input type="text" name="surname" value="<?=$user['surname']?>" class="my-form-control" placeholder="Enter Your Full Name">
                             </div>
                             <div class="form-group">
                                 <label>Phone</label>
-                                <input type="email" name="phone" class="my-form-control" placeholder="Enter Your Email">
+                                <input type="tel" name="phone" value="<?=$user['phone']?>" class="my-form-control" placeholder="Enter Your Email">
                             </div>
                             <h4 class="content-title mt-5">Profile Details</h4>
                             <div class="form-group">
                                 <label>About</label>
-                                <textarea type="text" name="about" required autofocus rows="3" class="my-form-control"></textarea>
+                                <textarea type="text" name="about" required autofocus rows="3" class="my-form-control"><?=$user['about']?></textarea>
                             </div>
                          <!--<div class="form-group">
                                 <label>Birthday*</label>
@@ -100,7 +100,8 @@
                                 <label>City*</label>
                                 <input type="text" class="my-form-control" placeholder="Enter Your City">
                             </div>-->
-                            <button class="default-btn reverse" data-toggle="modal" data-target="#email-confirm"><span>Create Your Profile</span></button>
+                            <button class="default-btn reverse" data-toggle="modal" data-target="#email-confirm"><span>Добавить данные</span></button>
+                            <a href="?act=articles" class="default-btn reverse" data-toggle="modal" data-target="#email-confirm"><span>Моя страница</span></a>
                         </form>
                     </div>
                 </div>

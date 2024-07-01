@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 ini_set('display_errors',1);
 
 require_once 'conf.php';
-session_abort();
+session_start();
 $mysqli = new mysqli(DB_HOST, DB_USER,DB_PASSWORD ,DB_NAME);
 
 if (isset($_GET['act'])){
@@ -17,6 +17,18 @@ if (isset($_GET['act'])){
             break;
         case 'profile':
             require_once 'action/profile.php';
+            break;
+        case 'add':
+            require_once 'action/add.php';
+            break;
+        case 'articles':
+            require_once 'action/articles.php';
+            break;
+        case 'edit':
+            require_once 'action/edit.php';
+            break;
+        case 'delete':
+            require_once 'action/delete.php';
             break;
     }
     die();

@@ -49,16 +49,16 @@
 						aria-label="Toggle navigation">
 						<span class="navbar-toggler--icon"></span>
 					</button>
-					<div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-						<div class="navbar-nav mainmenu">
-							<ul>
-								<li class="active"><a href="#0">Blogs</a></li>
-								<li><a href="contact.html">contact</a></li>
-								<li><a href="contact.html">Log In</a></li>
-								<li><a href="contact.html">Sign Up</a></li>
-							</ul>
-						</div>
-					</div>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                        <div class="navbar-nav mainmenu">
+                            <ul>
+                                <li><a href="/?act=register" class="default-btn reverse"><span>Главная</span></a></li>
+                                <li><a href="/?act=register" class="default-btn reverse"><span>Регистрация</span></a></li>
+                                <li><a href="/?act=login" class="default-btn reverse"><span>Авторизация</span></a></li>
+                                <li><a href="/?act=profile" class="default-btn reverse"><span>Profile</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
 				</nav>
 			</div>
 		</div>
@@ -74,28 +74,29 @@
     <!-- ================> Blog section start here <================== -->
     <div class="blog padding-top padding-bottom">
 		<div class="container">
-			<div class="section-wrapper">
-				<div class="row g-4 justify-content-center">
-					<div class="col-lg-6 col-12">
-						<div class="blog__item">
-							<div class="blog__inner">
-								<div class="blog__thumb">
-									<img src="assets/images/blog/01.jpg" alt="blog-thumb" class="w-100">
-								</div>
-								<div class="blog__content px-3 py-4">
-									<a href="blog-single.html"><h3>Compellingly productivate innovative niches rather.</h3></a>
-									<div class="blog__metapost">
-										<a href="#">Admin</a>
-										<a href="#">01 January 2022</a>
-									</div>
-									<p>Uniquely conceptuaze visionary process ariwith tactical ramatica centered qualitys vectoris with outofthebox scenario is ompelling uthoritatively generate front-end niches after one</p>
-									<a href="blog-single.html" class="default-btn reverse"><span>read more</span></a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+            <a href="/?act=add"><button type="button" class="btn btn-success">Add</button></a>
+			<table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Created At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php while ($row = $result->fetch_assoc()):?>
+                    <tr>
+                        <th scope="row"><?=$row['id']?></th>
+                        <td><?=$row['title']?></td>
+                        <td><?=$row['createdAt']?></td>
+                        <td>
+                            <a href="/?act=edit&id=<?=$row['id']?>"><button type="button" class="btn btn-primary">Edit</button></a>
+                            <a href="/?act=delete&id=<?=$row['id']?>"><button type="button" class="btn btn-danger">Delete</button></a>
+                        </td>
+                    </tr>
+                <?php endwhile ?>
+                </tbody>
+            </table>
 		</div>
 	</div>
     <!-- ================> Blog section end here <================== -->
