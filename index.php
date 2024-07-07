@@ -3,8 +3,11 @@
 error_reporting(E_ALL);
 ini_set('display_errors',1);
 
-require_once 'conf.php';
 session_start();
+
+require_once 'conf.php';
+require_once 'functions/helpers.php';
+
 $mysqli = new mysqli(DB_HOST, DB_USER,DB_PASSWORD ,DB_NAME);
 
 if (isset($_GET['act'])){
@@ -30,9 +33,24 @@ if (isset($_GET['act'])){
         case 'delete':
             require_once 'action/delete.php';
             break;
+        case 'logout':
+            require_once 'action/logout.php';
+            break;
+        case 'view':
+            require_once 'action/view.php';
+            break;
     }
     die();
 }
+
+$user = null;
+
+$userId = intval($_SESSION['userId'] ?? null);
+if ($userId){
+    $result = $mysqli->query("SELECT * FROM user WHERE id = '" . $userId . "' LIMIT 1");
+    $user = $result->fetch_assoc();
+}
+$result = $mysqli->query("SELECT * FROM article ORDER BY id DESC LIMIT 10");
 
 require_once 'templates/index.php';
 

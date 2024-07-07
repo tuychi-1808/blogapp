@@ -21,13 +21,19 @@ if (!$id){
 }
 
 if (count($_POST)){
+    $sql = "";
+    if ($_FILES['file']['size']){
+        $fileName = upload($user['id']);
+        $sql = "img = '" . $fileName . "', ";
+        $artcle = getUserArticle($mysqli, $id, $user['id']);
+        @unlink($_SERVER['DOCUMENT_ROOT'] . '/images/' . $artcle['img']);
+    }
     $title = $_POST['title'] ?? null;
     $content = $_POST['content'] ?? null;
-    $mysqli->query("UPDATE article SET userId = '" . $id . "', title = '" . $title . "', content = '" . $content . "' WHERE id = " . $id . " AND userId = " . $userId);
+    $mysqli->query("UPDATE article SET " . $sql . "title = '" . $title . "', content = '" . $content . "' WHERE id = " . $id . " AND userId = " . $userId);
     header('Location: /?act=articles');
     die();
 }
-
 
 $result =  $mysqli->query("SELECT * FROM article WHERE id = '" . $id . "' AND userId = " . $userId . " LIMIT 1");
 $articles = $result->fetch_assoc();

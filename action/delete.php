@@ -2,17 +2,7 @@
 /**
  * @var $mysqli
  */
-if (empty($_SESSION['userId'])){
-    header('Location: /?act=login');
-    die();
-}
-$userId = $_SESSION['userId'];
-$result = $mysqli->query("SELECT * FROM user WHERE id = '" . $userId . "' LIMIT 1");
-$user = $result->fetch_assoc();
-if (!$user){
-    header('Location: /?act=login');
-    die();
-}
+$user = checkUser($mysqli);
 
 $id = $_GET['id'] ?? null;
 if (!$id){
@@ -20,5 +10,8 @@ if (!$id){
     die();
 }
 
-$mysqli->query("DELETE FROM article WHERE id = " . $id . " AND userId = " . $userId );
+$artcle = getUserArticle($mysqli, $id, $user['id']);
+
+@unlink($_SERVER['DOCUMENT_ROOT'] . '/images/' . $artcle['img']);
+$mysqli->query("DELETE FROM article WHERE id = " . $id . " AND userId = " . $user['id'] );
 header('Location: /?act=articles');
